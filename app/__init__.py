@@ -23,16 +23,11 @@ def create_app():
     app = Flask(__name__)
 
     app.config.from_object(Config)
-
+    print("FRONTEND_URL =", app.config["FRONTEND_URL"])
     CORS(
-        app,
-        resources={
-            r"/api/*": {
-                "origins": app.config["FRONTEND_URL"]
-            }
-        },
-        supports_credentials=True
-    )
+    app,
+    resources={r"/*": {"origins": "*"}}
+)
 
     db.init_app(app)
 
